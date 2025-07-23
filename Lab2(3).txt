@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	string str;
+	cout << "Enter a string: ";
+	getline(cin, str);
+
+
+
+	char c[3]={'/','*'};
+
+        if(str[0]==c[0] && str[1]==c[0])
+        {
+            cout<<"Single line Comment";
+
+        }
+
+        else if(str[0]==c[0] && str[1]==c[1] && str[str.length()-1]==c[0] && str[str.length()-2]==c[1])
+        {
+            cout<<"Multiline Comment";
+        }
+
+
+
+}
+

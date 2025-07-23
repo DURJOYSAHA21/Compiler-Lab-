@@ -1,0 +1,68 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	string str;
+	bool flag = true;
+	cout << "Enter a string: ";
+	char arr[52] = {
+		'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+		'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+		'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E',
+		'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
+		'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+
+	};
+	int a[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	cin >> str;
+	int count = 0;
+
+	while (str[count] != '\0')
+	{
+		count++;
+	}
+	for (int i = 0; i <count; i++)
+	{
+		for (int j = 0;j < 52;j++)
+		{
+			if (str[i] == arr[j])
+			{
+
+				flag = false;
+				break;
+			}
+
+
+		}
+		for (int k = 0; k < 10; k++)
+		{
+			if (str[i] == a[k] + '0')
+			{
+				flag = true;
+				break;
+			}
+			else
+			{
+				flag = false;
+			}
+		}
+
+	}
+	if (flag)
+	{
+		cout << "numeric";
+	}
+	else if(!flag)
+    {
+
+        cout << "not numeric";
+    }
+
+
+
+
+
+}
+
+
