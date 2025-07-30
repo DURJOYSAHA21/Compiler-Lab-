@@ -1,0 +1,166 @@
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    ifstream file("Test.txt");
+    if (!file)
+    {
+        cout << "Unable to open file.\n";
+        return 1;
+    }
+
+    string line;
+    if (getline(file, line))
+    {
+        vector<string> tokens;
+        string line;
+        while (getline(file, line))
+        {
+            if (!line.empty())
+            {
+            stringstream ss(line);
+            string token;
+
+            while (ss >> token)
+            {
+                tokens.push_back(token);
+            }
+            }
+        }
+
+        char Operator[6] = { '+', '-', '*', '/', '%', '=' };
+        int c = 1;
+
+        char arr[53] = {
+            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+            'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+            'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E',
+            'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
+            'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '_'
+        };
+
+        char a[63] = {
+            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+            'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+            'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E',
+            'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
+            'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '_',
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+        };
+
+        char punctuation[10] = { ';', '{', '}', '(', ')', '[', ']', ',', '.', ':' };
+        int puncCount = 1;
+
+        string keyword[4]={"int","float","main","break"};
+        int kwCount = 1;
+
+        for (const auto& t : tokens)
+        {
+            bool isOperator = false;
+            bool isPunctuation = false;
+
+            if (t.size() == 1)
+            {
+                char ch = t[0];
+
+                for (int j = 0; j < 6; j++)
+                {
+                    if (ch == Operator[j])
+                    {
+                        cout << "Operator " << c++ << " : " << t << endl;
+                        isOperator = true;
+                        break;
+                    }
+                }
+
+                if (isOperator)
+                {
+                    continue;
+                }
+
+                for (int j = 0; j < 10; j++)
+                {
+                    if (ch == punctuation[j])
+                    {
+                        cout << "Punctuation " << puncCount++ << " : " << t << endl;
+                        isPunctuation = true;
+                        break;
+                    }
+                }
+
+                if (isPunctuation)
+                {
+                    continue;
+                }
+            }
+
+            bool isKeyword = false;
+            for (int i = 0; i < 4; i++)
+            {
+                if (t == keyword[i])
+                {
+                    cout << "Keyword " << kwCount++ << " : " << t << endl;
+                    isKeyword = true;
+                    break;
+                }
+            }
+            if (isKeyword)
+            {
+               continue;
+            }
+
+
+            bool flag = false;
+            if (t.size() > 0)
+            {
+                for (int j = 0; j < 53; j++)
+                {
+                    if (t[0] == arr[j])
+                    {
+                        flag = true;
+                        break;
+                    }
+                }
+            }
+
+            if (flag)
+            {
+                for ( int i = 1; i < t.size(); i++)
+                {
+                    bool valid = false;
+                    for (int k = 0; k < 63; k++)
+                    {
+                        if (t[i] == a[k])
+                        {
+                            valid = true;
+                            break;
+                        }
+                    }
+                    if (!valid)
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+            }
+
+            if (flag)
+            {
+                cout << t << " is a Valid Identifier" << endl;
+            }
+            else
+            {
+                cout << t << " is an Invalid Identifier" << endl;
+            }
+
+        }
+    }
+
+    file.close();
+    return 0;
+}
